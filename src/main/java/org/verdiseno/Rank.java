@@ -1,4 +1,4 @@
-package main.java;
+package org.verdiseno;
 
 public enum Rank {
     TWO("2"),
