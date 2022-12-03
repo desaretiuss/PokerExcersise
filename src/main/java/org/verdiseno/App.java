@@ -7,4 +7,10 @@ public class App {
         List<Match> matches = PokerResults.getResults();
         System.out.println("Hello world!");
     }
+
+    private static int evaluateHand(Hand hand) {
+
+        return 1;
+    }
+
 }

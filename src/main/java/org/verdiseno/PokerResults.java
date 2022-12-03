@@ -37,9 +37,9 @@ public class PokerResults {
     private static List<Card> parseCardsFromStringNotations(String line) {
         List<Card> cards = new ArrayList<>();
         String[] cardNotations = line.split(" ");
-        for (int i = 0; i < cardNotations.length; i++) {
-            String rank = String.valueOf(cardNotations[i].charAt(0));
-            String suit = String.valueOf(cardNotations[i].charAt(1));
+        for (String cardNotation : cardNotations) {
+            String rank = String.valueOf(cardNotation.charAt(0));
+            String suit = String.valueOf(cardNotation.charAt(1));
             Card card = new Card(
                     Rank.findByAbbreviation(rank),
                     Suit.findByAbbreviation(suit)
