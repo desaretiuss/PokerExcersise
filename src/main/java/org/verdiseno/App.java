@@ -18,7 +18,7 @@ public class App {
         System.out.println("Hands won by First Player: " + handsWonByFirstPlayer);
     }
 
-    private static boolean isFirstPlayerWinner(HandResults results) {
+    protected static boolean isFirstPlayerWinner(HandResults results) {
         Set firstPlayerCards = new HashSet(results.firstPlayerHand().cards());
         Set secondPlayerCards = new HashSet(results.secondPlayerHand().cards());
         HandEvaluated firstPlayerHandEvaluated = HandEvaluated.evaluate(firstPlayerCards);

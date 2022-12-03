@@ -35,7 +35,7 @@ public class InputDataProcessor {
         return handResults;
     }
 
-    private static List<Card> parseCardsFromStringNotations(String line) {
+    protected static List<Card> parseCardsFromStringNotations(String line) {
         List<Card> cards = new ArrayList<>();
         String[] cardNotations = line.split(" ");
         for (String cardNotation : cardNotations) {
