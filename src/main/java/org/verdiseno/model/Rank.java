@@ -1,6 +1,7 @@
-package org.verdiseno;
+package org.verdiseno.model;
 
 public enum Rank {
+
     TWO("2"),
     THREE("3"),
     FOUR("4"),
@@ -15,6 +16,7 @@ public enum Rank {
     KING("K"),
     ACE("A");
     private final String abbreviation;
+
     Rank(String abbreviation) {
         this.abbreviation = abbreviation;
     }

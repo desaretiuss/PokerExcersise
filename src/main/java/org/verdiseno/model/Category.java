@@ -1,4 +1,4 @@
-package org.verdiseno;
+package org.verdiseno.model;
 
 public enum Category {
 
@@ -15,7 +15,7 @@ public enum Category {
     /**
      * Two different pairs.
      */
-    TWO_PAIRS,
+    TWO_PAIR,
 
     /**
      * Three cards of the same value.

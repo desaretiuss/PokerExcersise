@@ -1,11 +1,13 @@
-package org.verdiseno;
+package org.verdiseno.model;
 
 public enum Suit {
-    CLUB("C"),
-    DIAMOND("D"),
-    HEART("H"),
-    SPADE("S");
+
+    DIAMONDS("D"),
+    CLUBS("C"),
+    HEARTS("H"),
+    SPADES("S");
     private final String abbreviation;
+
     Suit(String abbreviation) {
         this.abbreviation = abbreviation;
     }
