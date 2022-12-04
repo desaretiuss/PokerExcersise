@@ -3,7 +3,7 @@ package org.verdiseno;
 import org.verdiseno.logic.HandEvaluator;
 import org.verdiseno.logic.InputDataProcessor;
 import org.verdiseno.model.HandEvaluationData;
-import org.verdiseno.model.HandResults;
+import org.verdiseno.model.HandResult;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class App {
     public static final String INPUT_DATA_FILENAME = "/poker.txt";
 
     public static void main(String[] args) {
-        List<HandResults> handResults = InputDataProcessor.getResults(INPUT_DATA_FILENAME);
+        List<HandResult> handResults = InputDataProcessor.getResults(INPUT_DATA_FILENAME);
         long handsWonByFirstPlayer = handResults.stream()
                 .filter(results -> isFirstPlayerWinner(results))
                 .count();
@@ -20,7 +20,7 @@ public class App {
         System.out.println("Hands won by First Player: " + handsWonByFirstPlayer);
     }
 
-    public static boolean isFirstPlayerWinner(HandResults results) {
+    public static boolean isFirstPlayerWinner(HandResult results) {
         HandEvaluationData firstPlayerEvaluationData = HandEvaluator.evaluate(results.firstPlayerHand());
         HandEvaluationData secondPlayerEvaluationData = HandEvaluator.evaluate(results.secondPlayerHand());
         return firstPlayerEvaluationData.compareTo(secondPlayerEvaluationData) > 0;

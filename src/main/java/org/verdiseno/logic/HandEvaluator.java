@@ -12,7 +12,7 @@ import java.util.Set;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-import static org.verdiseno.model.HandRanking.*;
+import static org.verdiseno.model.HandCategory.*;
 import static org.verdiseno.model.Rank.ACE;
 import static org.verdiseno.model.Rank.FIVE;
 

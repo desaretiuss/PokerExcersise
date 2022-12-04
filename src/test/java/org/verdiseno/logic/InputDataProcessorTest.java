@@ -12,15 +12,15 @@ public class InputDataProcessorTest {
 
     @Test
     public void whenProcessingInputDataExpectCorrectResults() {
-        List<HandResults> expectedResults = List.of(
+        List<HandResult> expectedResults = List.of(
                 createHandResultsFor1stLineInFile(),
                 createHandResultsFor2ndLineInFile()
         );
-        List<HandResults> actualResults = InputDataProcessor.getResults(INPUT_TEST_DATA_FILENAME);
+        List<HandResult> actualResults = InputDataProcessor.getResults(INPUT_TEST_DATA_FILENAME);
         assertEquals(actualResults, expectedResults);
     }
 
-    private HandResults createHandResultsFor1stLineInFile() {
+    private HandResult createHandResultsFor1stLineInFile() {
         Card card_8C = new Card(Rank.EIGHT, Suit.CLUBS);
         Card card_TS = new Card(Rank.TEN, Suit.SPADES);
         Card card_KC = new Card(Rank.KING, Suit.CLUBS);
@@ -32,13 +32,13 @@ public class InputDataProcessorTest {
         Card card_3S = new Card(Rank.THREE, Suit.SPADES);
         Card card_AC = new Card(Rank.ACE, Suit.CLUBS);
 
-        return new HandResults(
+        return new HandResult(
                 new Hand(List.of(card_8C, card_TS, card_KC, card_9H, card_4S)),
                 new Hand(List.of(card_7D, card_2S, card_5D, card_3S, card_AC))
         );
     }
 
-    private HandResults createHandResultsFor2ndLineInFile() {
+    private HandResult createHandResultsFor2ndLineInFile() {
         Card card_5C = new Card(Rank.FIVE, Suit.CLUBS);
         Card card_AD = new Card(Rank.ACE, Suit.DIAMONDS);
         Card card_5D = new Card(Rank.FIVE, Suit.DIAMONDS);
@@ -50,7 +50,7 @@ public class InputDataProcessorTest {
         Card card_TD = new Card(Rank.TEN, Suit.DIAMONDS);
         Card card_KS = new Card(Rank.KING, Suit.SPADES);
 
-        return new HandResults(
+        return new HandResult(
                 new Hand(List.of(card_5C, card_AD, card_5D, card_AC, card_9C)),
                 new Hand(List.of(card_7C, card_5H, card_8D, card_TD, card_KS))
         );

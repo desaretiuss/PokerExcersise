@@ -10,8 +10,8 @@ import java.util.List;
 @Log4j2
 public class InputDataProcessor {
 
-    public static List<HandResults> getResults(String filename) {
-        List<HandResults> handResults = new ArrayList<>();
+    public static List<HandResult> getResults(String filename) {
+        List<HandResult> handResults = new ArrayList<>();
         InputStream inputStream = InputDataProcessor.class.getResourceAsStream(filename);
         try {
             if (inputStream == null) {
@@ -20,10 +20,8 @@ public class InputDataProcessor {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             while (reader.ready()) {
                 String line = reader.readLine();
-                List<Card> cards = parseCardsFromStringNotations(line);
-                Hand firstPlayerHand = new Hand(cards.subList(0, 5));
-                Hand secondPlayerHand = new Hand(cards.subList(5, 10));
-                handResults.add(new HandResults(firstPlayerHand, secondPlayerHand));
+                HandResult result = parseResultsFromStringNotations(line);
+                handResults.add(result);
             }
         } catch (FileNotFoundException e) {
             log.error("File containing poker results data not found: {}", e.getMessage());
@@ -34,7 +32,7 @@ public class InputDataProcessor {
         return handResults;
     }
 
-    protected static List<Card> parseCardsFromStringNotations(String line) {
+    protected static HandResult parseResultsFromStringNotations(String line) {
         List<Card> cards = new ArrayList<>();
         String[] cardNotations = line.split(" ");
         for (String cardNotation : cardNotations) {
@@ -46,6 +44,8 @@ public class InputDataProcessor {
             );
             cards.add(card);
         }
-        return cards;
+        Hand firstPlayerHand = new Hand(cards.subList(0, 5));
+        Hand secondPlayerHand = new Hand(cards.subList(5, 10));
+        return new HandResult(firstPlayerHand, secondPlayerHand);
     }
 }
