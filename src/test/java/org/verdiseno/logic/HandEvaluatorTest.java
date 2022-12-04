@@ -1,19 +1,20 @@
-package org.verdiseno;
+package org.verdiseno.logic;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.verdiseno.App;
 import org.verdiseno.model.Card;
 import org.verdiseno.model.Hand;
 import org.verdiseno.model.HandResults;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
-public class PokerHandEvaluatorTest {
+public class HandEvaluatorTest {
 
     private Map<String, Integer> demoValuesMap = new HashMap<>();
 
@@ -29,15 +30,14 @@ public class PokerHandEvaluatorTest {
     @Test
     public void whenEvaluatingHandsExpectCorrectWinners() {
         List<Integer> expectedWinners = demoValuesMap.values().stream().toList();
-        List<Integer> actualWinners = new ArrayList<>();
-        demoValuesMap.forEach((key, value) -> {
-            List<Card> allCards = InputDataProcessor.parseCardsFromStringNotations(key);
+        List<Integer> actualWinners = demoValuesMap.entrySet().stream().map(entry -> {
+            List<Card> allCards = InputDataProcessor.parseCardsFromStringNotations(entry.getKey());
             HandResults handResults = new HandResults(
                     new Hand(allCards.subList(0, 5)),
                     new Hand(allCards.subList(5, 10))
             );
-            actualWinners.add(App.isFirstPlayerWinner(handResults) ? 1 : 2);
-        });
+            return App.isFirstPlayerWinner(handResults) ? 1 : 2;
+        }).collect(Collectors.toList());
         assertEquals(actualWinners, expectedWinners);
     }
 }

@@ -1,10 +1,11 @@
 package org.verdiseno;
 
+import org.verdiseno.logic.HandEvaluator;
+import org.verdiseno.logic.InputDataProcessor;
+import org.verdiseno.model.HandEvaluationData;
 import org.verdiseno.model.HandResults;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class App {
 
@@ -18,11 +19,9 @@ public class App {
         System.out.println("Hands won by First Player: " + handsWonByFirstPlayer);
     }
 
-    protected static boolean isFirstPlayerWinner(HandResults results) {
-        Set firstPlayerCards = new HashSet(results.firstPlayerHand().cards());
-        Set secondPlayerCards = new HashSet(results.secondPlayerHand().cards());
-        HandEvaluated firstPlayerHandEvaluated = HandEvaluated.evaluate(firstPlayerCards);
-        HandEvaluated secondPlayerHandEvaluated = HandEvaluated.evaluate(secondPlayerCards);
-        return firstPlayerHandEvaluated.compareTo(secondPlayerHandEvaluated) > 0;
+    public static boolean isFirstPlayerWinner(HandResults results) {
+        HandEvaluationData firstPlayerEvaluationData = HandEvaluator.evaluate(results.firstPlayerHand());
+        HandEvaluationData secondPlayerEvaluationData = HandEvaluator.evaluate(results.secondPlayerHand());
+        return firstPlayerEvaluationData.compareTo(secondPlayerEvaluationData) > 0;
     }
 }

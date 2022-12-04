@@ -1,6 +1,6 @@
 package org.verdiseno.model;
 
-public enum Category {
+public enum HandRanking {
 
     /**
      * Highest value card.

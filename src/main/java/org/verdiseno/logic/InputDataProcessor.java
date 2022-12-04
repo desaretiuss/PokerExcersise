@@ -1,4 +1,4 @@
-package org.verdiseno;
+package org.verdiseno.logic;
 
 import lombok.extern.log4j.Log4j2;
 import org.verdiseno.model.*;
