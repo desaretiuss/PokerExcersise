@@ -9,14 +9,13 @@ import java.util.List;
 
 @Log4j2
 public class InputDataProcessor {
-    public static final String FILENAME = "/poker.txt";
 
-    public static List<HandResults> getResults() {
+    public static List<HandResults> getResults(String filename) {
         List<HandResults> handResults = new ArrayList<>();
-        InputStream inputStream = InputDataProcessor.class.getResourceAsStream(FILENAME);
+        InputStream inputStream = InputDataProcessor.class.getResourceAsStream(filename);
         try {
             if (inputStream == null) {
-                throw new FileNotFoundException(String.format("No resource with name: %s was found", FILENAME));
+                throw new FileNotFoundException(String.format("No resource with name: %s was found", filename));
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             while (reader.ready()) {

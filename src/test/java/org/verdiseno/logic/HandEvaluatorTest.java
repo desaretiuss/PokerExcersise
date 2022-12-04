@@ -16,21 +16,21 @@ import static org.junit.Assert.assertEquals;
 
 public class HandEvaluatorTest {
 
-    private Map<String, Integer> demoValuesMap = new HashMap<>();
+    private Map<String, Integer> testValuesMap = new HashMap<>();
 
     @Before
     public void setup() {
-        demoValuesMap.put("5H 5C 6S 7S KD 2C 3S 8S 8D TD", 2);
-        demoValuesMap.put("5D 8C 9S JS AC 2C 5C 7D 8S QH", 1);
-        demoValuesMap.put("2D 9C AS AH AC 3D 6D 7D TD QD", 2);
-        demoValuesMap.put("4D 6S 9H QH QC 3D 6D 7H QD QS", 1);
-        demoValuesMap.put("2H 2D 4C 4D 4S 3C 3D 3S 9S 9D", 1);
+        testValuesMap.put("5H 5C 6S 7S KD 2C 3S 8S 8D TD", 2);
+        testValuesMap.put("5D 8C 9S JS AC 2C 5C 7D 8S QH", 1);
+        testValuesMap.put("2D 9C AS AH AC 3D 6D 7D TD QD", 2);
+        testValuesMap.put("4D 6S 9H QH QC 3D 6D 7H QD QS", 1);
+        testValuesMap.put("2H 2D 4C 4D 4S 3C 3D 3S 9S 9D", 1);
     }
 
     @Test
     public void whenEvaluatingHandsExpectCorrectWinners() {
-        List<Integer> expectedWinners = demoValuesMap.values().stream().toList();
-        List<Integer> actualWinners = demoValuesMap.entrySet().stream().map(entry -> {
+        List<Integer> expectedWinners = testValuesMap.values().stream().toList();
+        List<Integer> actualWinners = testValuesMap.entrySet().stream().map(entry -> {
             List<Card> allCards = InputDataProcessor.parseCardsFromStringNotations(entry.getKey());
             HandResults handResults = new HandResults(
                     new Hand(allCards.subList(0, 5)),

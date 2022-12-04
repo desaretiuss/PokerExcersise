@@ -8,9 +8,10 @@ import org.verdiseno.model.HandResults;
 import java.util.List;
 
 public class App {
+    public static final String INPUT_DATA_FILENAME = "/poker.txt";
 
     public static void main(String[] args) {
-        List<HandResults> handResults = InputDataProcessor.getResults();
+        List<HandResults> handResults = InputDataProcessor.getResults(INPUT_DATA_FILENAME);
         long handsWonByFirstPlayer = handResults.stream()
                 .filter(results -> isFirstPlayerWinner(results))
                 .count();
