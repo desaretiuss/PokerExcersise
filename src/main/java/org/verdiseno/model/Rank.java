@@ -1,5 +1,7 @@
 package org.verdiseno.model;
 
+import java.util.Arrays;
+
 public enum Rank {
 
     TWO("2"),
@@ -22,11 +24,9 @@ public enum Rank {
     }
 
     public static Rank findByAbbreviation(String abbreviation) {
-        for (Rank rank : values()) {
-            if (rank.abbreviation.equals(abbreviation)) {
-                return rank;
-            }
-        }
-        throw new IllegalArgumentException();
+        return Arrays.stream(values())
+                .filter(rank -> rank.abbreviation.equals(abbreviation))
+                .findFirst()
+                .orElseThrow();
     }
 }

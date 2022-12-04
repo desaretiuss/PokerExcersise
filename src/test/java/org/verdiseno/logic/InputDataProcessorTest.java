@@ -1,14 +1,17 @@
 package org.verdiseno.logic;
 
 import org.junit.Test;
+import org.verdiseno.config.PropertiesLoader;
 import org.verdiseno.model.*;
 
 import java.util.List;
+import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 
 public class InputDataProcessorTest {
-    public static final String INPUT_TEST_DATA_FILENAME = "/poker-test.txt";
+
+    private static final String POKER_DATA_TEST_INPUT_FILENAME = "poker.data.test.input.filename";
 
     @Test
     public void whenProcessingInputDataExpectCorrectResults() {
@@ -16,7 +19,10 @@ public class InputDataProcessorTest {
                 createHandResultsFor1stLineInFile(),
                 createHandResultsFor2ndLineInFile()
         );
-        List<HandResult> actualResults = InputDataProcessor.getResults(INPUT_TEST_DATA_FILENAME);
+        Properties conf = PropertiesLoader.loadProperties();
+        String filename = conf.getProperty(POKER_DATA_TEST_INPUT_FILENAME);
+
+        List<HandResult> actualResults = InputDataProcessor.processInputData(filename);
         assertEquals(actualResults, expectedResults);
     }
 

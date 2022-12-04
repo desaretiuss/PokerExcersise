@@ -1,5 +1,7 @@
 package org.verdiseno.model;
 
+import java.util.Arrays;
+
 public enum Suit {
 
     DIAMONDS("D"),
@@ -13,11 +15,9 @@ public enum Suit {
     }
 
     public static Suit findByAbbreviation(String abbreviation) {
-        for (Suit suit : values()) {
-            if (suit.abbreviation.equals(abbreviation)) {
-                return suit;
-            }
-        }
-        throw new IllegalArgumentException();
+        return Arrays.stream(values())
+                .filter(suit -> suit.abbreviation.equals(abbreviation))
+                .findFirst()
+                .orElseThrow();
     }
 }

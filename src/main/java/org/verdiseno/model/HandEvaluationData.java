@@ -11,4 +11,5 @@ public record HandEvaluationData(HandCategory handCategory, Rank... ranks) imple
                 .thenComparing(HandEvaluationData::ranks, Arrays::compare)
                 .compare(this, that);
     }
+
 }

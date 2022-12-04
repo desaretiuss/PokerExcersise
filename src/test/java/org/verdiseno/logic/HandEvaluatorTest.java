@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
-import static org.verdiseno.logic.InputDataProcessor.parseResultsFromStringNotations;
+import static org.verdiseno.logic.InputDataProcessor.parseResultFromStringNotations;
 import static org.verdiseno.model.HandCategory.*;
 
 public class HandEvaluatorTest {
@@ -21,11 +21,11 @@ public class HandEvaluatorTest {
     @Before
     public void setup() {
         results = List.of(
-                parseResultsFromStringNotations("5H 5C 6S 7S KD 2C 3S 8S 8D TD"),
-                parseResultsFromStringNotations("5D 8C 9S JS AC 2C 5C 7D 8S QH"),
-                parseResultsFromStringNotations("2D 9C AS AH AC 3D 6D 7D TD QD"),
-                parseResultsFromStringNotations("4D 6S 9H QH QC 3D 6D 7H QD QS"),
-                parseResultsFromStringNotations("2H 2D 4C 4D 4S 3C 3D 3S 9S 9D")
+                parseResultFromStringNotations("5H 5C 6S 7S KD 2C 3S 8S 8D TD"),
+                parseResultFromStringNotations("5D 8C 9S JS AC 2C 5C 7D 8S QH"),
+                parseResultFromStringNotations("2D 9C AS AH AC 3D 6D 7D TD QD"),
+                parseResultFromStringNotations("4D 6S 9H QH QC 3D 6D 7H QD QS"),
+                parseResultFromStringNotations("2H 2D 4C 4D 4S 3C 3D 3S 9S 9D")
         );
 
         expectedResultInfos = List.of(

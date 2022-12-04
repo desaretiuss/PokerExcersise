@@ -1,28 +1,33 @@
 package org.verdiseno;
 
+import org.verdiseno.config.PropertiesLoader;
 import org.verdiseno.logic.HandEvaluator;
 import org.verdiseno.logic.InputDataProcessor;
 import org.verdiseno.model.HandEvaluationData;
-import org.verdiseno.model.HandResult;
 
-import java.util.List;
+import java.util.Properties;
 
 public class App {
-    public static final String INPUT_DATA_FILENAME = "/poker.txt";
+    private static final String POKER_DATA_INPUT_FILENAME = "poker.data.input.filename";
 
     public static void main(String[] args) {
-        List<HandResult> handResults = InputDataProcessor.getResults(INPUT_DATA_FILENAME);
-        long handsWonByFirstPlayer = handResults.stream()
-                .filter(results -> isFirstPlayerWinner(results))
-                .count();
         System.out.println("--------- Poker Results ---------");
         System.out.println("---------------------------------");
-        System.out.println("Hands won by First Player: " + handsWonByFirstPlayer);
+        System.out.println("Hands won by First Player: " + calculateHandsWonByFirstPlayer());
     }
 
-    public static boolean isFirstPlayerWinner(HandResult results) {
-        HandEvaluationData firstPlayerEvaluationData = HandEvaluator.evaluate(results.firstPlayerHand());
-        HandEvaluationData secondPlayerEvaluationData = HandEvaluator.evaluate(results.secondPlayerHand());
-        return firstPlayerEvaluationData.compareTo(secondPlayerEvaluationData) > 0;
+    public static long calculateHandsWonByFirstPlayer() {
+        Properties conf = PropertiesLoader.loadProperties();
+        String filename = conf.getProperty(POKER_DATA_INPUT_FILENAME);
+
+        return InputDataProcessor
+                .processInputData(filename)
+                .stream()
+                .filter(result -> {
+                    HandEvaluationData firstPlayerEvaluationData = HandEvaluator.evaluate(result.firstPlayerHand());
+                    HandEvaluationData secondPlayerEvaluationData = HandEvaluator.evaluate(result.secondPlayerHand());
+                    return firstPlayerEvaluationData.compareTo(secondPlayerEvaluationData) > 0;
+                }).count();
+
     }
 }

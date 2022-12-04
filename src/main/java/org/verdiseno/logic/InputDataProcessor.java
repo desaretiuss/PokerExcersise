@@ -5,34 +5,40 @@ import org.verdiseno.model.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Log4j2
 public class InputDataProcessor {
 
-    public static List<HandResult> getResults(String filename) {
-        List<HandResult> handResults = new ArrayList<>();
-        InputStream inputStream = InputDataProcessor.class.getResourceAsStream(filename);
+    private InputDataProcessor() {
+    }
+
+    public static List<HandResult> processInputData(String filename) {
+        return readDataInputFile(filename)
+                .stream()
+                .map(InputDataProcessor::parseResultFromStringNotations)
+                .toList();
+    }
+
+    private static List<String> readDataInputFile(String filename) {
+        log.info("PokerEuler -- InputDataProcessor: Reading data input...");
+        InputStream inputStream = InputDataProcessor.class.getClassLoader().getResourceAsStream(filename);
         try {
             if (inputStream == null) {
-                throw new FileNotFoundException(String.format("No resource with name: %s was found", filename));
+                throw new FileNotFoundException(String.format("No resource file with name: %s was found", filename));
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            while (reader.ready()) {
-                String line = reader.readLine();
-                HandResult result = parseResultsFromStringNotations(line);
-                handResults.add(result);
-            }
-        } catch (FileNotFoundException e) {
-            log.error("File containing poker results data not found: {}", e.getMessage());
+            return reader.lines().toList();
         } catch (IOException e) {
             log.error("Error while processing poker results data from file: {}", e.getMessage());
             e.printStackTrace();
         }
-        return handResults;
+        return Collections.emptyList();
     }
 
-    protected static HandResult parseResultsFromStringNotations(String line) {
+    protected static HandResult parseResultFromStringNotations(String line) {
+        log.info("PokerEuler -- InputDataProcessor: Parsing results");
         List<Card> cards = new ArrayList<>();
         String[] cardNotations = line.split(" ");
         for (String cardNotation : cardNotations) {
